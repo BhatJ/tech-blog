@@ -1,0 +1,21 @@
+<!-- If the user is logged in, render the gallery content -->
+{{#if loggedIn}}
+
+  <section class="card">
+    {{!-- Replace name with title --}}
+    <header>
+      <h1>{{blog.title}}</h1>
+      <h6>{{blog.user.username}}</h6> 
+      <h6>{{format_date blog.created_date}}</h6>
+    </header>
+    {{!-- Replace with with the blog message --}}
+    <p>{{blog.content}}</p>
+  </section>
+
+  {{#each blog.comments as |comment|}}
+  {{> blogpost-details}}
+  {{/each}}
+<!-- Otherwise, provide a link to login -->
+{{else}}
+<a href="/login">You must login first to view this page</a>
+{{/if}}
