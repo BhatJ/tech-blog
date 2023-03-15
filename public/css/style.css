@@ -169,16 +169,22 @@ img {
 }
 
 #comment-lbl {
-  font-size: xx-large;
+  font-size:x-large;
+  margin-left: 1%;
   margin-bottom: 10px;
 }
 
 #comment-input {
-  width: 100%;
+  width: 98%;
+  margin-left: 1%;
   margin-bottom: 10px;
+  border-color: blue;
+  border-width: 5px;
+  resize: none;
 }
 
 #comment_btn {
-  width: 100%;
+  width: 98%;
+  margin-left: 1%;
   margin-bottom: 10px;
 }

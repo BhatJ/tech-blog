@@ -1,32 +1,28 @@
-<!-- If the user is logged in, render the gallery content -->
+{{!-- Render blog post --}}
+<section class="card">
+  <header>
+    <h1>{{blog.title}}</h1>
+    <h6>{{blog.user.username}}</h6> 
+    <h6>{{format_date blog.created_date}}</h6>
+  </header>
+  <p>{{blog.content}}</p>
+</section>
+
+{{!-- Use blogpost-details partial to render all comments associated with this blog post --}}
+{{#each blog.comments as |comment|}}
+{{> blogpost-details}}
+{{/each}}
+
+{{!-- If the user is logged in, render form to add comments --}}
 {{#if loggedIn}}
-
-  <section class="card">
-    {{!-- Replace name with title --}}
-    <header>
-      <h1>{{blog.title}}</h1>
-      <h6>{{blog.user.username}}</h6> 
-      <h6>{{format_date blog.created_date}}</h6>
-    </header>
-    {{!-- Replace with with the blog message --}}
-    <p>{{blog.content}}</p>
-  </section>
-
-  {{#each blog.comments as |comment|}}
-  {{> blogpost-details}}
-  {{/each}}
-
-  <section class="card">
-    <div class="form-group">
-      <label id="comment-lbl" for="comment-input">Comment:</label><br>
-      <input class="form-input" type="text" id="comment-input" />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary" id="comment_btn" type="submit">Submit</button>
-    </div>
-  </section>
-
-<!-- Otherwise, provide a link to login -->
-{{else}}
-<a href="/login">You must login first to view this page</a>
+<section class="card">
+  <div class="form-group">
+    <label id="comment-lbl" for="comment-input">Comment:</label><br>
+    {{!-- <input class="form-input" type="text" id="comment-input" /> --}}
+    <textarea id="comment-input" name="comment-input" rows=5></textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" id="comment_btn" type="submit">Submit</button>
+  </div>
+</section>
 {{/if}}
