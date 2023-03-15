@@ -15,6 +15,17 @@
   {{#each blog.comments as |comment|}}
   {{> blogpost-details}}
   {{/each}}
+
+  <section class="card">
+    <div class="form-group">
+      <label id="comment-lbl" for="comment-input">Comment:</label><br>
+      <input class="form-input" type="text" id="comment-input" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" id="comment_btn" type="submit">Submit</button>
+    </div>
+  </section>
+
 <!-- Otherwise, provide a link to login -->
 {{else}}
 <a href="/login">You must login first to view this page</a>

@@ -167,3 +167,18 @@ img {
   align-content: flex-start;
   align-items: center;
 }
+
+#comment-lbl {
+  font-size: xx-large;
+  margin-bottom: 10px;
+}
+
+#comment-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#comment_btn {
+  width: 100%;
+  margin-bottom: 10px;
+}
