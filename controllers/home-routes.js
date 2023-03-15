@@ -31,6 +31,8 @@ router.get('/', async (req, res) => {
 
 // GET one gallery
 router.get('/blogpost/:id', async (req, res) => {
+  const blogspot = true;
+  const loggedIn = req.session.loggedIn;
   try {
     const dbBlogData = await Blogpost.findByPk(req.params.id, {
       include: [
@@ -71,7 +73,7 @@ router.get('/blogpost/:id', async (req, res) => {
     console.log("\n\n------------------------USERS------------------------\n\n");
     console.log(users);
 
-    res.render('blogpost', { blog, loggedIn: req.session.loggedIn });
+    res.render('blogpost', { blog, loggedIn, blogspot });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

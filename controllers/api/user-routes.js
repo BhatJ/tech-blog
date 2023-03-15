@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Comment } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -70,6 +70,24 @@ router.post('/logout', (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+router.post('/comment', async (req, res) => {
+
+  try {
+    const dbCommentData = await Comment.create({
+      content: req.body.comment,
+      blogpost_id: req.body.blogpostId,
+      user_id: req.session.user_id,
+      created_date: req.body.createdDate,
+    });   
+
+    res.status(200).json(dbCommentData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+
 });
 
 module.exports = router;
