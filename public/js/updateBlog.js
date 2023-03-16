@@ -49,7 +49,6 @@ const deleteFormHandler = async (event) => {
   }
 };
 
-
 console.log("Waiting to update or delete a post");
 
 document
