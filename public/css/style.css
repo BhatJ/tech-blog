@@ -120,6 +120,12 @@ img {
   color: var(--dark);
 }
 
+.btn-card {
+  margin: 20px;
+  /* flex: 0 1 300px; */
+  width:100%;
+}
+
 .login-card {
   margin: 10%;
   flex: 0 0 50%;
@@ -168,23 +174,29 @@ img {
   align-items: center;
 }
 
-#comment-lbl {
+#comment-lbl, #title-lbl, #create-post-lbl {
   font-size:x-large;
   margin-left: 1%;
   margin-bottom: 10px;
 }
 
-#comment-input {
+#comment-input, #title-input, #content-input {
   width: 98%;
   margin-left: 1%;
   margin-bottom: 10px;
   border-color: blue;
-  border-width: 5px;
+  border-width: 3px;
   resize: none;
 }
 
-#comment_btn {
+#comment_btn, #create-post-btn {
   width: 98%;
   margin-left: 1%;
   margin-bottom: 10px;
+}
+
+#create_btn {
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 20px;
 }

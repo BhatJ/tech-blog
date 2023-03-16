@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment } = require('../../models');
+const { User, Blogpost, Comment } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -72,6 +72,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// Post a comment
 router.post('/comment', async (req, res) => {
 
   try {
@@ -83,6 +84,25 @@ router.post('/comment', async (req, res) => {
     });   
 
     res.status(200).json(dbCommentData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+
+});
+
+// Create a new blog topic
+router.post('/newpost', async (req, res) => {
+
+  try {
+    const dbNewpostData = await Blogpost.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.user_id,
+      created_date: req.body.createdDate,
+    });   
+
+    res.status(200).json(dbNewpostData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
