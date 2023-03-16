@@ -33,8 +33,11 @@
   </main>
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>
-  {{#if blogspot}}
+  {{#if blogpost}}
   <script src="/js/comment.js"></script>
+  {{/if}}
+  {{#if newpost}}
+  <script src="/js/createBlog.js"></script>
   {{/if}}
   {{/if}}
   

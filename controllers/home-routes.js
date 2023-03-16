@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 
 // GET one gallery
 router.get('/blogpost/:id', async (req, res) => {
-  const blogspot = true;
+  const blogpost = true;
   const loggedIn = req.session.loggedIn;
   try {
     const dbBlogData = await Blogpost.findByPk(req.params.id, {
@@ -68,12 +68,7 @@ router.get('/blogpost/:id', async (req, res) => {
 
     }
 
-    console.log("\n\n------------------------BLOG------------------------\n\n");
-    console.log(blog);
-    console.log("\n\n------------------------USERS------------------------\n\n");
-    console.log(users);
-
-    res.render('blogpost', { blog, loggedIn, blogspot });
+    res.render('blogpost', { blog, loggedIn, blogpost });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -83,6 +78,7 @@ router.get('/blogpost/:id', async (req, res) => {
 // Dashboard route
 router.get('/dashboard', async (req, res) => {
   const loggedIn = req.session.loggedIn;
+
   if (loggedIn) {
 
     try {
@@ -93,6 +89,25 @@ router.get('/dashboard', async (req, res) => {
       console.log(blogs);
 
       res.render('dashboard', {blogs, loggedIn});
+      return;
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  res.render('login');
+});
+
+// Dashboard route
+router.get('/dashboard/newpost', async (req, res) => {
+  const loggedIn = req.session.loggedIn;
+  const newpost = true;
+
+  if (loggedIn) {
+
+    try {
+      console.log("\n\n Create a new blog \n\n");
+
+      res.render('createpost', {loggedIn, newpost});
       return;
     } catch (err) {
       res.status(500).json(err);
