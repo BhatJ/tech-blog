@@ -32,28 +32,23 @@ const deleteFormHandler = async (event) => {
 
   console.log("Delete button clicked");
 
-  // const title = document.querySelector('#title-input').value.trim();
-  // const content = document.querySelector('#content-input').value.trim();
-  // const createdDate = Date.now();
+  const blogpostId = document.URL.split('/').slice(-1)[0];
 
-  // console.log(title);
-  // console.log(content);
-  // console.log(createdDate);
+  if (blogpostId) {
+    const response = await fetch('/api/users/deletepost', {
+      method: 'DELETE',
+      body: JSON.stringify({blogpostId}),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-  // if (title && content && createdDate) {
-  //   const response = await fetch('/api/users/newpost', {
-  //     method: 'DELETE',
-  //     body: JSON.stringify({ title, content, createdDate}),
-  //     headers: { 'Content-Type': 'application/json' },
-  //   });
-
-  //   if (response.ok) {
-  //     document.location.replace('/dashboard');
-  //   } else {
-  //     alert('Failed to create new post');
-  //   }
-  // }
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert('Failed to delete a post');
+    }
+  }
 };
+
 
 console.log("Waiting to update or delete a post");
 
