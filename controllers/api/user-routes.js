@@ -110,4 +110,29 @@ router.post('/newpost', async (req, res) => {
 
 });
 
+router.put('/updatepost', async (req, res) => {
+
+  try {
+    const dbUpdateData = await Blogpost.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+        user_id: req.session.user_id,
+        created_date: req.body.createdDate,
+      },
+      {
+        where: {
+          id: req.body.blogpostId,
+        }
+      }
+    );   
+
+    res.status(200).json(dbUpdateData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+
+});
+
 module.exports = router;

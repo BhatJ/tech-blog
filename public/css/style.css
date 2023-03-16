@@ -189,7 +189,7 @@ img {
   resize: none;
 }
 
-#comment_btn, #create-post-btn {
+#comment_btn, #create-post-btn, #update-post-btn, #delete-post-btn {
   width: 98%;
   margin-left: 1%;
   margin-bottom: 10px;

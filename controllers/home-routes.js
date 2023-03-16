@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Blogpost, Comment } = require('../models');
 
-// GET all galleries for homepage
+// GET all blogs for homepage
 router.get('/', async (req, res) => {
   try {
     const dbBlogpostData = await Blogpost.findAll({
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
+// GET one blog and all comments for that blog
 router.get('/blogpost/:id', async (req, res) => {
   const blogpost = true;
   const loggedIn = req.session.loggedIn;
@@ -75,7 +75,7 @@ router.get('/blogpost/:id', async (req, res) => {
   }
 });
 
-// Dashboard route
+// GET all blogs created by logged in user
 router.get('/dashboard', async (req, res) => {
   const loggedIn = req.session.loggedIn;
 
@@ -97,7 +97,7 @@ router.get('/dashboard', async (req, res) => {
   res.render('login');
 });
 
-// Dashboard route
+// Create a new post route
 router.get('/dashboard/newpost', async (req, res) => {
   const loggedIn = req.session.loggedIn;
   const newpost = true;
@@ -113,6 +113,36 @@ router.get('/dashboard/newpost', async (req, res) => {
       res.status(500).json(err);
     }
   }
+  res.render('login');
+});
+
+// Update a post route
+router.get('/dashboard/updatepost/:id', async (req, res) => {
+  const loggedIn = req.session.loggedIn;
+  const updatepost = true;
+
+  if (loggedIn) {
+    try {
+      console.log("\n\n Update an existing blog post \n\n");
+
+      const dbBlogData = await Blogpost.findByPk(req.params.id, {
+        attributes: [
+          'title',
+          'content',
+        ],
+      });
+      const blog = dbBlogData.get({ plain: true });
+
+      console.log("\n\n------------------ BLOGPOST TO UPDATE --------------------\n\n");
+      console.log(blog);
+
+      res.render('updatepost', {blog, loggedIn, updatepost});
+      return;
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
   res.render('login');
 });
 
