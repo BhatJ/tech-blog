@@ -78,6 +78,7 @@ router.get('/blogpost/:id', async (req, res) => {
 // GET all blogs created by logged in user
 router.get('/dashboard', async (req, res) => {
   const loggedIn = req.session.loggedIn;
+  const dashboardPage = true;
 
   if (loggedIn) {
 
@@ -88,7 +89,7 @@ router.get('/dashboard', async (req, res) => {
       console.log("\n\n BLOGS \n\n");
       console.log(blogs);
 
-      res.render('dashboard', {blogs, loggedIn});
+      res.render('dashboard', {blogs, loggedIn, dashboardPage});
       return;
     } catch (err) {
       res.status(500).json(err);
@@ -101,13 +102,14 @@ router.get('/dashboard', async (req, res) => {
 router.get('/dashboard/newpost', async (req, res) => {
   const loggedIn = req.session.loggedIn;
   const newpost = true;
+  const dashboardPage = true;
 
   if (loggedIn) {
 
     try {
       console.log("\n\n Create a new blog \n\n");
 
-      res.render('createpost', {loggedIn, newpost});
+      res.render('createpost', {loggedIn, dashboardPage, newpost});
       return;
     } catch (err) {
       res.status(500).json(err);
@@ -120,6 +122,7 @@ router.get('/dashboard/newpost', async (req, res) => {
 router.get('/dashboard/updatepost/:id', async (req, res) => {
   const loggedIn = req.session.loggedIn;
   const updatepost = true;
+  const dashboardPage = true;
 
   if (loggedIn) {
     try {
@@ -136,7 +139,7 @@ router.get('/dashboard/updatepost/:id', async (req, res) => {
       console.log("\n\n------------------ BLOGPOST TO UPDATE --------------------\n\n");
       console.log(blog);
 
-      res.render('updatepost', {blog, loggedIn, updatepost});
+      res.render('updatepost', {blog, loggedIn, dashboardPage, updatepost});
       return;
     } catch (err) {
       res.status(500).json(err);

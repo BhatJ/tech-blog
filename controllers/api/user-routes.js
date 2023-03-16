@@ -135,4 +135,36 @@ router.put('/updatepost', async (req, res) => {
 
 });
 
+router.delete('/deletepost', async (req, res) => {
+  try {
+
+    console.log("\n\n------------ DELETE POST --------------\n\n")
+
+    // Delete all comments associated with the blog post
+    const commentData = await Comment.destroy({
+      where: {
+        blogpost_id: req.body.blogpostId,
+      }
+    });
+
+    // Now delete the blog post
+    const blogpostData = await Blogpost.destroy({
+      where: {
+        id: req.body.blogpostId,
+      }
+    });
+
+    if(blogpostData)
+    {
+      res.status(200).json(blogpostData);
+    } else
+    {
+      res.status(404).json(blogpostData);
+    }
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
